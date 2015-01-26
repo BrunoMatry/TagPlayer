@@ -1,26 +1,29 @@
 package tools;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Filewalker { 
+public class Filewalker {
+    private List<File> files;
 
-    public void walk(String path) { 
-
-        File root = new File(path); 
-
+    public Filewalker(String path) {
+        files = new ArrayList<>();
+        this.walk(path); 
+    }
+    
+    private void walk (String path) {
+        File root = new File(path);
         for (File f : root.listFiles()) { 
             if (f.isDirectory()) { 
-                walk(f.getAbsolutePath()); 
-                System.err.println("Dir:" + f.getAbsoluteFile()); 
-            } 
-            else { 
-                System.err.println("File:" + f.getAbsoluteFile()); 
-            } 
-        } 
-    } 
-
-    public static void main(String[] args) { 
-        Filewalker fw = new Filewalker(); 
-        fw.walk("c:\\" ); 
+                walk(f.getAbsolutePath());  
+            } else if(!f.isHidden() && f.isFile()) {
+                files.add(f);
+            }
+        }
+    }
+    
+    public List<File> getFiles() {
+        return files;
     }
 } 
