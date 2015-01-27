@@ -39,4 +39,9 @@ public class MusicFile {
     public void addTag(Tag t) {
         tags.add(t);
     }
+
+    @Override
+    public String toString() {
+        return this.getFile().getName();
+    }
 }
