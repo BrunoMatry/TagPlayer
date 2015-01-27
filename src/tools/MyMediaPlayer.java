@@ -25,4 +25,8 @@ public class MyMediaPlayer {
     public void play() {
         mediaplayer.play();
     }
+    
+    public void stop() {
+        mediaplayer.stop();
+    }
 }
