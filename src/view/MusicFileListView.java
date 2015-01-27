@@ -6,12 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.media.Media;
+import javafx.util.Callback;
 import model.MusicFile;
 
 public final class MusicFileListView extends ListView<MusicFile>{
-    private List<MusicFile> musicFileList;
+    public List<MusicFile> musicFileList;
     private final ObservableList data;
     
     public MusicFileListView(List<MusicFile> list) {
@@ -20,6 +22,7 @@ public final class MusicFileListView extends ListView<MusicFile>{
         this.setEditable(false);
         this.setItems(data);
         this.setOnMouseClicked(new MyEventHandler(this));
+        //TODO this.setCellFactory(new MyCallback(this));
     }
     
     public void setData(List<MusicFile> list) {
@@ -46,4 +49,17 @@ public final class MusicFileListView extends ListView<MusicFile>{
             mediaPlayer.play();
         }
    }
+    
+    private class MyCallback implements Callback<ListView<MusicFile>, ListCell<MusicFile>>{
+        private MusicFileListView musicFileListView;
+        public MyCallback(MusicFileListView mfls) {
+            musicFileListView = mfls;
+        }
+        
+        @Override
+        public ListCell<MusicFile> call(ListView<MusicFile> p) {
+            return MyListCell.getInstance();
+        }
+        
+    }
 }
