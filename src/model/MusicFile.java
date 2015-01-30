@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.media.Media;
+import tools.FileTool;
 
 public class MusicFile {
 
@@ -40,8 +41,7 @@ public class MusicFile {
         tags.add(t);
     }
 
-    @Override
-    public String toString() {
-        return this.getFile().getName();
+    public String getName() {
+        return FileTool.removeFileExtension(this.getFile().getName());
     }
 }

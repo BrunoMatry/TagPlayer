@@ -1,4 +1,4 @@
-package view;
+package view.window;
 
 import controller.ApplicationParameters;
 import java.util.List;
@@ -7,6 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.MusicFile;
+import view.MyListView;
+import view.MyToolBar;
 
 public class MainWindow {
     private static Stage primaryStage;

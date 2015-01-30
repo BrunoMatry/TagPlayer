@@ -15,7 +15,7 @@ public class MyHBoxCell extends HBox {
 
     MyHBoxCell(MusicFile musicFile) {
         super();
-        label = new Label(musicFile.getFile().getName());
+        label = new Label(musicFile.getName());
         label.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(label, Priority.ALWAYS);     
         this.getChildren().addAll(label, new PlayButton(musicFile));
