@@ -5,6 +5,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import view.button.StopButton;
 
 public class MyToolBar extends ToolBar {
 
@@ -15,7 +16,6 @@ public class MyToolBar extends ToolBar {
         Button btn1 = new Button("|<<");
         Button btnNew = new Button("Pause");
         Button btn2 = new Button(">>|");
-        Button btnPause = new Button("Stop");
         Button btnQuit = new Button("Sort by");
         CheckBox chkSound = new CheckBox("Random");
         CheckBox chkMusic = new CheckBox("Loop");
@@ -27,8 +27,7 @@ public class MyToolBar extends ToolBar {
                 btn1,
                 btnNew,
                 btn2,
-                btnPause,
-                
+                new StopButton(),
                 new Separator(),
                 chkSound,
                 chkMusic
