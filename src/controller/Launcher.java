@@ -9,7 +9,6 @@ public class Launcher extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        // Generate a MusicFile list
         MusicFileList musicFileList = new MusicFileList();
         musicFileList.findMusicFilesFromPath(ApplicationParameters.DEFAULT_PATH);
         MainWindow.initialize(primaryStage, musicFileList);

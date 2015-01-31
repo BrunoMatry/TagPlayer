@@ -13,7 +13,7 @@ public class TagButton extends Button {
     public TagButton(Tag tag) {
         super();
         this.setOnAction((ActionEvent event) -> {
-            List<MusicFile> list = MainWindow.getOriginalMusicFileList().getMusicFilesWithTag(tag);
+            List<MusicFile> list = MainWindow.getFullMusicFileList().getMusicFilesWithTag(tag);
             MainWindow.setMusicFileList(new MusicFileList(list));
         });
         this.setText(tag.getName());

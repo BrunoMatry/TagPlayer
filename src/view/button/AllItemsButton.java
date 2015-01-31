@@ -8,7 +8,7 @@ public class AllItemsButton extends Button {
     public AllItemsButton() {
         super();
         this.setOnAction((ActionEvent event) -> {
-            MainWindow.setOriginalMusicFileList();
+            MainWindow.setFullMusicFileList();
         });
         this.setText("See all songs");
     }
