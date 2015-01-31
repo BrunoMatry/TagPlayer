@@ -12,16 +12,23 @@ import view.button.TagButton;
 
 public class MyHBoxCell extends HBox {
     private final Label label;
+    private final MusicFile musicFile;
 
-    MyHBoxCell(MusicFile musicFile) {
+    public MyHBoxCell(MusicFile mf) {
         super();
+        musicFile = mf;
         label = new Label(musicFile.getName());
         label.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(label, Priority.ALWAYS);     
+        refresh();
+    }
+    
+    public final void refresh() {
+        this.getChildren().clear();
         this.getChildren().addAll(label, new PlayButton(musicFile));
         for(Tag t : musicFile.getTags()) {
             this.getChildren().addAll(new TagButton(t));
         }
-        this.getChildren().addAll(new AddTagButton(musicFile), new DetailsButton(musicFile));
+        this.getChildren().addAll(new AddTagButton(musicFile, this), new DetailsButton(musicFile));
     }
 }
