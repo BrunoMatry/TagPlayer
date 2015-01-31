@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.MusicFile;
+import model.MusicFileList;
 import view.MyListView;
 import view.MyToolBar;
 
@@ -17,6 +18,7 @@ public class MainWindow {
     private static Scene scene;
     private static final MainWindow INSTANCE = new MainWindow();
     private static MyListView listView;
+    private static MusicFileList musicFileList;
     
     private MainWindow() {
         root = new BorderPane();
@@ -37,16 +39,18 @@ public class MainWindow {
         primaryStage.show();
     }
 
-    public void setMusicFileList(List<MusicFile> list) {
-        if(listView != null) {
-            root.getChildren().remove(list);
-        }
-        listView = new MyListView(list);
+    public void setMusicFileList(MusicFileList list) {
+        musicFileList = list;
+        listView = new MyListView(musicFileList.getMusicFiles());
         musicFileStackPane.getChildren().add(listView);
         primaryStage.show();
     }
 
     public static MainWindow getInstance() {
         return INSTANCE;
+    }
+    
+    public MusicFileList getMusicFileList() {
+        return musicFileList;
     }
 }

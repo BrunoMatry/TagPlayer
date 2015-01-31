@@ -37,8 +37,9 @@ public class MusicFile {
         tags.remove(t);
     }
     
-    public void addTag(Tag t) {
-        tags.add(t);
+    public void addTag(String tagName) {
+        // Recuperation eventuelle du tag existant
+        tags.add(TagList.addTag(tagName));
     }
 
     public String getName() {

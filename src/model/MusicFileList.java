@@ -13,11 +13,15 @@ public class MusicFileList {
         files = new ArrayList<>();
     }
 
+    public MusicFileList(List<MusicFile> list) {
+        files = list;
+    }
+
     public List<MusicFile> getMusicFiles() {
         return files;
     }
 
-    public void getMusicFilesFromPath(String path) {
+    public void findMusicFilesFromPath(String path) {
         Filewalker fw = new Filewalker(path);
         List<File> walkedFiles = fw.getFiles();
         for(File f : walkedFiles) {
@@ -25,5 +29,15 @@ public class MusicFileList {
                 files.add(new MusicFile(f));
             }
         }
+    }
+
+    public List<MusicFile> getMusicFilesWithTag(Tag t) {
+        List<MusicFile> list = new ArrayList<>();
+        for(MusicFile mf : files) {
+            if(mf.getTags().contains(t)) {
+                list.add(mf);
+            }
+        }
+        return list;
     }
 }

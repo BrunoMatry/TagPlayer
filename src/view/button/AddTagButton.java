@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import model.Log;
 import model.MusicFile;
-import model.Tag;
 import view.MyHBoxCell;
 import view.window.AddTagDialog;
 
@@ -28,9 +27,8 @@ public class AddTagButton extends Button {
     }
     
     private void addTagAction(String tagName) {
-        Tag tag = new Tag(tagName);
-        musicFile.addTag(tag);
+        musicFile.addTag(tagName);
         cell.refresh();
-        Log.addTagLog(musicFile.getName(), tag.getName());
+        Log.addTagLog(musicFile.getName(), tagName);
     }
 }
