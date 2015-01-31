@@ -29,6 +29,6 @@ public class MyHBoxCell extends HBox {
         for(Tag t : musicFile.getTags()) {
             this.getChildren().addAll(new TagButton(t));
         }
-        this.getChildren().addAll(new AddTagButton(musicFile, this), new DetailsButton(musicFile));
+        this.getChildren().addAll(new AddTagButton(musicFile, this)/*, new DetailsButton(musicFile)*/);
     }
 }
