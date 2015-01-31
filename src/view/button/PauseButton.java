@@ -14,7 +14,7 @@ public class PauseButton extends Button {
     private void fromPlayToPause() {
         this.setText("Pause");
         this.setOnAction((ActionEvent event) -> {
-            MyMediaPlayer.getInstance().pause();
+            MyMediaPlayer.pause();
             fromPauseToPlay();
         });
     }
@@ -22,7 +22,7 @@ public class PauseButton extends Button {
     private void fromPauseToPlay() {
         this.setText("Play");
         this.setOnAction((ActionEvent event) -> {
-            MyMediaPlayer.getInstance().play();
+            MyMediaPlayer.play();
             fromPlayToPause();
         });
     }

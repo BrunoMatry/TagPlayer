@@ -5,32 +5,28 @@ import javafx.scene.media.MediaPlayer;
 
 public class MyMediaPlayer {
     private static final MyMediaPlayer INSTANCE = new MyMediaPlayer();
-    private static MediaPlayer mediaplayer;
+    private MediaPlayer mediaplayer;
     
     private MyMediaPlayer() {
         mediaplayer = null;
     }
     
-    public static MyMediaPlayer getInstance() {
-        return INSTANCE;
-    }
-    
-    public void setMedia(Media m) {
-        if(mediaplayer != null) {
-            mediaplayer.dispose();
+    public static void setMedia(Media m) {
+        if(INSTANCE.mediaplayer != null) {
+            INSTANCE.mediaplayer.dispose();
         }
-        mediaplayer = new MediaPlayer(m);
+        INSTANCE.mediaplayer = new MediaPlayer(m);
     }
     
-    public void play() {
-        mediaplayer.play();
+    public static void play() {
+        INSTANCE.mediaplayer.play();
     }
     
-    public void stop() {
-        mediaplayer.stop();
+    public static void stop() {
+        INSTANCE.mediaplayer.stop();
     }
 
-    public void pause() {
-        mediaplayer.pause();
+    public static void pause() {
+        INSTANCE.mediaplayer.pause();
     }
 }

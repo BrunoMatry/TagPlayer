@@ -9,14 +9,10 @@ public class Launcher extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        // Create MainWindow instance
-        MainWindow mainWindow = MainWindow.getInstance();
-        mainWindow.initialize(primaryStage);
-
         // Generate a MusicFile list
         MusicFileList musicFileList = new MusicFileList();
-        musicFileList.getMusicFilesFromPath(ApplicationParameters.DEFAULT_PATH);
-        mainWindow.setMusicFileList(musicFileList.getMusicFiles());
+        musicFileList.findMusicFilesFromPath(ApplicationParameters.DEFAULT_PATH);
+        MainWindow.initialize(primaryStage, musicFileList);
     }
     public static void main(String[] args) {
         launch(args);
