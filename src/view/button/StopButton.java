@@ -11,6 +11,6 @@ public class StopButton extends Button {
         this.setOnAction((ActionEvent event) -> {
             MyMediaPlayer.getInstance().stop();
         });
-    this.setText("Stop");
+        this.setText("Stop");
     }
 }
