@@ -1,24 +1,22 @@
 package view.window;
 
 import controller.ApplicationParameters;
-import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import model.MusicFile;
 import model.MusicFileList;
 import view.MyListView;
 import view.MyToolBar;
 
 public class MainWindow {
-    private static Stage primaryStage;
-    private static BorderPane root;
-    private static StackPane musicFileStackPane;
-    private static Scene scene;
+    private Stage primaryStage;
+    private final BorderPane root;
+    private final StackPane musicFileStackPane;
+    private final Scene scene;
     private static final MainWindow INSTANCE = new MainWindow();
-    private static MyListView listView;
-    private static MusicFileList musicFileList;
+    private MusicFileList originalMusicFileList;
+    private MusicFileList currentMusicFileList;
     
     private MainWindow() {
         root = new BorderPane();
@@ -32,25 +30,27 @@ public class MainWindow {
         root.setCenter(musicFileStackPane);
     }
 
-    public void initialize(Stage stage) {
-        primaryStage = stage;
-        primaryStage.setTitle(ApplicationParameters.APPLICATION_NAME);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public static void initialize(Stage stage, MusicFileList list) {
+        INSTANCE.primaryStage = stage;
+        INSTANCE.originalMusicFileList = list;
+        INSTANCE.currentMusicFileList = list;
+        INSTANCE.primaryStage.setTitle(ApplicationParameters.APPLICATION_NAME);
+        INSTANCE.primaryStage.setScene(INSTANCE.scene);
+        setMusicFileList(INSTANCE.originalMusicFileList);
+        INSTANCE.primaryStage.show();
     }
 
-    public void setMusicFileList(MusicFileList list) {
-        musicFileList = list;
-        listView = new MyListView(musicFileList.getMusicFiles());
-        musicFileStackPane.getChildren().add(listView);
-        primaryStage.show();
-    }
-
-    public static MainWindow getInstance() {
-        return INSTANCE;
+    public static void setMusicFileList(MusicFileList filteredList) {
+        INSTANCE.musicFileStackPane.getChildren().clear();
+        INSTANCE.musicFileStackPane.getChildren().add(new MyListView(filteredList.getMusicFiles()));
+        INSTANCE.currentMusicFileList = filteredList;
     }
     
-    public MusicFileList getMusicFileList() {
-        return musicFileList;
+    public static MusicFileList getOriginalMusicFileList() {
+        return INSTANCE.originalMusicFileList;
+    }
+    
+    public static MusicFileList getCurrentMusicFileList() {
+        return INSTANCE.currentMusicFileList;
     }
 }

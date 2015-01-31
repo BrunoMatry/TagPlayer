@@ -13,9 +13,8 @@ public class TagButton extends Button {
     public TagButton(Tag tag) {
         super();
         this.setOnAction((ActionEvent event) -> {
-            MainWindow mainWindow = MainWindow.getInstance();
-            List<MusicFile> list = mainWindow.getMusicFileList().getMusicFilesWithTag(tag);
-            mainWindow.setMusicFileList(new MusicFileList(list));
+            List<MusicFile> list = MainWindow.getOriginalMusicFileList().getMusicFilesWithTag(tag);
+            MainWindow.setMusicFileList(new MusicFileList(list));
         });
         this.setText(tag.getName());
     }

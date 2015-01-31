@@ -9,7 +9,7 @@ public class StopButton extends Button {
     public StopButton() {
         super();
         this.setOnAction((ActionEvent event) -> {
-            MyMediaPlayer.getInstance().stop();
+            MyMediaPlayer.stop();
         });
         this.setText("Stop");
     }
