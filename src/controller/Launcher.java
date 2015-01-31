@@ -3,7 +3,7 @@ package controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.MusicFileList;
-import view.MainWindow;
+import view.window.MainWindow;
  
 public class Launcher extends Application {
     
