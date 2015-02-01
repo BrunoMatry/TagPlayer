@@ -18,21 +18,20 @@ public class OnCloseHandler implements EventHandler<WindowEvent> {
 
     @Override
     public void handle(WindowEvent e) {
-        List<MusicFile> musicFiles = MainWindow.getFullMusicFileList().getMusicFiles();
-        Map<String, String> map = new HashMap<>();
-        for(MusicFile mf : musicFiles) {
-            if(!mf.getTags().isEmpty()) {
-                String tags = "";
-                for(Tag t : mf.getTags()) {
-                    tags +=  ApplicationParameters.FILE_SEPARATOR + t.getName();
-                }
-                map.put(mf.getFile().getAbsolutePath(), tags);
-            }
-        }
-        MyFileWriter.saveDataBase(map);
+        saveDatabase();
         Log.onCloseLog();
         Platform.exit();
         System.exit(0);
     }
     
+    private void saveDatabase() {
+        List<MusicFile> musicFiles = MainWindow.getFullMusicFileList().getMusicFiles();
+        Map<String, List<Tag>> map = new HashMap<>();
+        for(MusicFile mf : musicFiles) {
+            if(!mf.getTags().isEmpty()) {
+                map.put(mf.getFile().getAbsolutePath(), mf.getTags());
+            }
+        }
+        MyFileWriter.saveDataBase(map);
+    }
 }

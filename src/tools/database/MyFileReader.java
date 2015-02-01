@@ -13,22 +13,17 @@ import model.MusicFileList;
 
 public class MyFileReader {
 
-    public static void loadInDba(MusicFileList list) {
+    public static void loadInDba(MusicFileList musicFileList) {
         try {
             try (BufferedReader br = new BufferedReader(new FileReader("database.pdb"))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String filePath = line.substring(0, line.indexOf(ApplicationParameters.FILE_SEPARATOR));
-                    MusicFile mf = list.getMusicFileFromFilePath(filePath);
+                String fileLine;
+                while ((fileLine = br.readLine()) != null) {
+                    String[] elements = fileLine.split(ApplicationParameters.FILE_SEPARATOR);
+                    MusicFile mf = musicFileList.getMusicFileFromFilePath(elements[0]);
                     if(mf != null) {
-                        do {
-                            line = line.substring(line.indexOf(ApplicationParameters.FILE_SEPARATOR)+1);
-                            if(line.contains(ApplicationParameters.FILE_SEPARATOR)) {
-                                mf.addTag(line.substring(0, line.indexOf(ApplicationParameters.FILE_SEPARATOR)));
-                            } else {
-                                mf.addTag(line);
-                            }
-                        } while(line.contains(ApplicationParameters.FILE_SEPARATOR));
+                        for(int i = 1 ; i < elements.length ; i++) {
+                            mf.addTag(elements[i]);
+                        }
                     }
                 }
             }
@@ -38,5 +33,4 @@ public class MyFileReader {
             Log.onInternalErrorLog(ex.getMessage());
         }
     }
-    
 }
