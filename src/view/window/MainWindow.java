@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.MusicFileList;
+import tools.database.MyFileReader;
 import view.MyListView;
 import view.MyToolBar;
 import view.OnCloseHandler;
@@ -35,6 +36,7 @@ public class MainWindow {
 
     public static void initialize(Stage stage, MusicFileList list) {
         INSTANCE.primaryStage = stage;
+        MyFileReader.loadInDba(list);
         INSTANCE.fullMusicFileList = list;
         INSTANCE.currentMusicFileList = list;
         INSTANCE.primaryStage.setTitle(ApplicationParameters.APPLICATION_NAME);

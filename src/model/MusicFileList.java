@@ -40,4 +40,13 @@ public class MusicFileList {
         }
         return list;
     }
+
+    public MusicFile getMusicFileFromFilePath(String filePath) {
+        for(MusicFile mf : files) {
+            if(mf.getFile().getAbsolutePath().equals(filePath)) {
+                return mf;
+            }
+        }
+        return null;
+    }
 }
