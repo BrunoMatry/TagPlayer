@@ -1,5 +1,6 @@
 package view.button;
 
+import controller.ApplicationParameters;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -19,7 +20,9 @@ public class AddTagButton extends Button {
         this.setOnAction((ActionEvent event) -> {
             AddTagDialog dialog = new AddTagDialog();         
             Optional<String> result = dialog.showAndWait();
-            if (result.isPresent() && !result.get().equals("")){
+            if (result.isPresent()
+               && !result.get().equals("")
+               && !result.get().contains(ApplicationParameters.FILE_SEPARATOR)){
                 addTagAction(result.get());
             }
         });

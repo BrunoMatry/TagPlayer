@@ -6,16 +6,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.MusicFileList;
+import tools.database.MyFileReader;
 import view.MyListView;
 import view.MyToolBar;
+import view.OnCloseHandler;
 
 public class MainWindow {
+
     private Stage primaryStage;
     private final BorderPane root;
     private final StackPane musicFileStackPane;
     private final Scene scene;
     private static final MainWindow INSTANCE = new MainWindow();
-    private MusicFileList originalMusicFileList;
+    private MyListView fulllListView;
+    private MusicFileList fullMusicFileList;
     private MusicFileList currentMusicFileList;
     
     private MainWindow() {
@@ -32,11 +36,14 @@ public class MainWindow {
 
     public static void initialize(Stage stage, MusicFileList list) {
         INSTANCE.primaryStage = stage;
-        INSTANCE.originalMusicFileList = list;
+        MyFileReader.loadInDba(list);
+        INSTANCE.fullMusicFileList = list;
         INSTANCE.currentMusicFileList = list;
         INSTANCE.primaryStage.setTitle(ApplicationParameters.APPLICATION_NAME);
         INSTANCE.primaryStage.setScene(INSTANCE.scene);
-        setMusicFileList(INSTANCE.originalMusicFileList);
+        INSTANCE.fulllListView = new MyListView(INSTANCE.fullMusicFileList.getMusicFiles());
+        INSTANCE.primaryStage.setOnCloseRequest(new OnCloseHandler());
+        INSTANCE.musicFileStackPane.getChildren().add(INSTANCE.fulllListView);
         INSTANCE.primaryStage.show();
     }
 
@@ -46,8 +53,13 @@ public class MainWindow {
         INSTANCE.currentMusicFileList = filteredList;
     }
     
-    public static MusicFileList getOriginalMusicFileList() {
-        return INSTANCE.originalMusicFileList;
+    public static void setFullMusicFileList() {
+        INSTANCE.musicFileStackPane.getChildren().clear();
+        INSTANCE.musicFileStackPane.getChildren().add(INSTANCE.fulllListView);
+    }
+
+    public static MusicFileList getFullMusicFileList() {
+        return INSTANCE.fullMusicFileList;
     }
     
     public static MusicFileList getCurrentMusicFileList() {
