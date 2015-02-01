@@ -8,6 +8,7 @@ import javafx.scene.layout.Priority;
 import model.MusicFile;
 import model.Tag;
 import view.button.AddTagButton;
+import view.button.RemoveTagButton;
 import view.button.TagButton;
 
 public class MyHBoxCell extends HBox {
@@ -27,7 +28,7 @@ public class MyHBoxCell extends HBox {
         this.getChildren().clear();
         this.getChildren().addAll(label, new PlayButton(musicFile));
         for(Tag t : musicFile.getTags()) {
-            this.getChildren().addAll(new TagButton(t));
+            this.getChildren().addAll(new TagButton(t), new RemoveTagButton(t, musicFile, this));
         }
         this.getChildren().addAll(new AddTagButton(musicFile, this)/*, new DetailsButton(musicFile)*/);
     }
