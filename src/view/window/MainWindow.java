@@ -20,6 +20,7 @@ public class MainWindow {
     private final Scene scene;
     private static final MainWindow INSTANCE = new MainWindow();
     private MyListView fulllListView;
+
     private ArrayList<MusicFile> fullMusicFileList;
     private ArrayList<MusicFile> currentMusicFileList;
     

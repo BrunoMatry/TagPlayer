@@ -1,21 +1,27 @@
 package tools;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.MusicFile;
 
 public class MyMediaPlayer {
     private static final MyMediaPlayer INSTANCE = new MyMediaPlayer();
     private MediaPlayer mediaplayer;
+    private ArrayList<MusicFile> playlist;
+    private Iterator<MusicFile> playListIterator;
     
     private MyMediaPlayer() {
         mediaplayer = null;
+        playlist = new ArrayList<>();
+        playListIterator = playlist.iterator();
     }
     
-    public static void setMedia(Media m) {
-        if(INSTANCE.mediaplayer != null) {
-            INSTANCE.mediaplayer.dispose();
-        }
-        INSTANCE.mediaplayer = new MediaPlayer(m);
+    public static void setPlaylist(ArrayList<MusicFile> pl) {
+        INSTANCE.playlist = pl;
+        INSTANCE.playListIterator = INSTANCE.playlist.iterator();
+        INSTANCE.playNextSong();
     }
     
     public static void play() {
@@ -28,5 +34,20 @@ public class MyMediaPlayer {
 
     public static void pause() {
         INSTANCE.mediaplayer.pause();
+    }
+
+    private void playNextSong() {
+        if(INSTANCE.playListIterator.hasNext()) {
+            INSTANCE.setMedia(INSTANCE.playListIterator.next().getMedia());
+        }
+    }
+
+    private void setMedia(Media m) {
+        if(mediaplayer != null) {
+            mediaplayer.dispose();
+        }
+        mediaplayer = new MediaPlayer(m);
+        mediaplayer.setAutoPlay(true);
+        mediaplayer.setOnEndOfMedia(this::playNextSong);
     }
 }

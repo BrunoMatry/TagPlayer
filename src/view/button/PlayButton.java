@@ -1,5 +1,6 @@
 package view.button;
 
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import model.MusicFile;
@@ -10,7 +11,9 @@ public class PlayButton extends Button {
     public PlayButton(MusicFile mf) {
         super();
         this.setOnAction((ActionEvent event) -> {
-            MyMediaPlayer.setMedia(mf.getMedia());
+            ArrayList<MusicFile> musicFileList = new ArrayList<>();
+            musicFileList.add(mf);
+            MyMediaPlayer.setPlaylist(musicFileList);
             MyMediaPlayer.play();
         });
         this.setText(">");
