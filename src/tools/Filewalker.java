@@ -2,10 +2,9 @@ package tools;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Filewalker {
-    private List<File> files;
+    private ArrayList<File> files;
 
     public Filewalker(String path) {
         files = new ArrayList<>();
@@ -23,7 +22,7 @@ public class Filewalker {
         }
     }
     
-    public List<File> getFiles() {
+    public ArrayList<File> getFiles() {
         return files;
     }
 } 
