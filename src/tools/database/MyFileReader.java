@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Log;
 import model.MusicFile;
-import model.MusicFileList;
+import tools.MusicFileTool;
 
 public class MyFileReader {
 
-    public static void loadInDba(MusicFileList musicFileList) {
+    public static void loadInDba(ArrayList<MusicFile> musicFileList) {
         try {
             try (BufferedReader br = new BufferedReader(new FileReader("database.pdb"))) {
                 String fileLine;
                 while ((fileLine = br.readLine()) != null) {
                     String[] elements = fileLine.split(ApplicationParameters.FILE_SEPARATOR);
-                    MusicFile mf = musicFileList.getMusicFileFromFilePath(elements[0]);
+                    MusicFile mf = MusicFileTool.getMusicFileFromFilePath(musicFileList, elements[0]);
                     if(mf != null) {
                         for(int i = 1 ; i < elements.length ; i++) {
                             mf.addTag(elements[i]);

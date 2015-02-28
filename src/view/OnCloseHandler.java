@@ -25,7 +25,7 @@ public class OnCloseHandler implements EventHandler<WindowEvent> {
     }
     
     private void saveDatabase() {
-        List<MusicFile> musicFiles = MainWindow.getFullMusicFileList().getMusicFiles();
+        List<MusicFile> musicFiles = MainWindow.getFullMusicFileList();
         Map<String, List<Tag>> map = new HashMap<>();
         for(MusicFile mf : musicFiles) {
             if(!mf.getTags().isEmpty()) {
