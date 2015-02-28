@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.MusicFile;
+import tools.comparator.AscendingAgeMusicFileComparator;
 import tools.database.MyFileReader;
 import view.MyListView;
 import view.MyToolBar;
@@ -37,6 +38,7 @@ public class MainWindow {
     }
 
     public static void initialize(Stage stage, ArrayList<MusicFile> list) {
+        list.sort(new AscendingAgeMusicFileComparator());
         INSTANCE.primaryStage = stage;
         MyFileReader.loadInDba(list);
         INSTANCE.fullMusicFileList = list;
