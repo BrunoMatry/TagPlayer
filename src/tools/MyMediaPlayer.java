@@ -21,7 +21,16 @@ public class MyMediaPlayer {
     public static void setPlaylist(ArrayList<MusicFile> pl) {
         INSTANCE.playlist = pl;
         INSTANCE.playListIterator = INSTANCE.playlist.iterator();
-        INSTANCE.playNextSong();
+        playNextSong();
+    }
+    
+    public static void setPlaylist(ArrayList<MusicFile> pl, MusicFile startingElement) {
+        INSTANCE.playlist = pl;
+        // Lecture du bon fichier
+        INSTANCE.setMedia(startingElement.getMedia());
+        // Placement iterateur
+        INSTANCE.playListIterator = INSTANCE.playlist.iterator();
+        while(!INSTANCE.playListIterator.next().equals(startingElement) && INSTANCE.playListIterator.hasNext());
     }
     
     public static void play() {
@@ -36,7 +45,7 @@ public class MyMediaPlayer {
         INSTANCE.mediaplayer.pause();
     }
 
-    private void playNextSong() {
+    public static void playNextSong() {
         if(INSTANCE.playListIterator.hasNext()) {
             INSTANCE.setMedia(INSTANCE.playListIterator.next().getMedia());
         }
@@ -48,6 +57,6 @@ public class MyMediaPlayer {
         }
         mediaplayer = new MediaPlayer(m);
         mediaplayer.setAutoPlay(true);
-        mediaplayer.setOnEndOfMedia(this::playNextSong);
+        mediaplayer.setOnEndOfMedia(() -> playNextSong());
     }
 }
